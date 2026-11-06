@@ -2,6 +2,12 @@
 
 > แอพพลิเคชัน Android ระดับมืออาชีพสำหรับแปลงภาพสแกนเอกสารเป็นไฟล์ PDF ไร้ลายน้ำ (No Watermark) ฟรี 100% ประมวลผลแบบ Offline ในเครื่องโดยสมบูรณ์ และออกแบบ UX ให้ใช้งานง่ายสำหรับผู้ใหญ่/คุณพ่อ
 
+[![Latest Release](https://img.shields.io/github/v/release/Chitsanuphong628/aek-pdf?color=007AFF&label=Release&logo=android)](https://github.com/Chitsanuphong628/aek-pdf/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-34C759.svg)](LICENSE)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android%208.0%2B-5856D6.svg)](https://developer.android.com)
+
+ดาวน์โหลดไฟล์ติดตั้งเวอร์ชันแรก: [**aek-pdf-v1.0.0.apk (12.6 MB)**](https://github.com/Chitsanuphong628/aek-pdf/releases/download/v1.0.0/aek-pdf-v1.0.0.apk)
+
 ---
 
 ## จุดเด่นของแอพพลิเคชัน (Key Features)

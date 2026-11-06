@@ -27,7 +27,9 @@ import com.aekpdf.app.core.ui.theme.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onNavigateToImageToPdf: () -> Unit,
+    onScanWithCamera: () -> Unit,
+    onPickImages: () -> Unit,
+    onPickPdfs: () -> Unit,
     onNavigateToHistory: () -> Unit
 ) {
     Scaffold(
@@ -60,8 +62,8 @@ fun HomeScreen(
                                 color = AppleTextPrimary
                             )
                             Text(
-                                text = "ไร้ลายน้ำ 100% • ปลอดภัยในเครื่อง",
-                                fontSize = 11.sp,
+                                text = "จัดการเอกสาร PDF ออฟไลน์",
+                                fontSize = 12.sp,
                                 color = AppleTextSecondary
                             )
                         }
@@ -93,106 +95,65 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding),
-            contentPadding = PaddingValues(horizontal = 18.dp, vertical = 12.dp),
+            contentPadding = PaddingValues(horizontal = 18.dp, vertical = 14.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Main Hero Feature: Image to PDF (Apple Card Style)
+            // Main Tools Section Header
             item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .appleCard(cornerRadius = 22.dp, elevation = 3.dp)
-                        .clickable(onClick = onNavigateToImageToPdf)
-                        .padding(20.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            // Vibrant Squircle App Icon Badge
-                            Box(
-                                modifier = Modifier.appleSquircleGradientBadge(
-                                    colors = listOf(AppleBlue, Color(0xFF32ADE6)),
-                                    size = 56.dp,
-                                    cornerRadius = 14.dp
-                                ),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.AddPhotoAlternate,
-                                    contentDescription = null,
-                                    tint = Color.White,
-                                    modifier = Modifier.size(32.dp)
-                                )
-                            }
+                Text(
+                    text = "เครื่องมือจัดการเอกสาร",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = AppleTextSecondary,
+                    modifier = Modifier.padding(start = 4.dp, top = 2.dp)
+                )
+            }
 
-                            // Apple Pill: Free & Watermark-Free
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(100.dp))
-                                    .background(AppleGreenTint)
-                                    .padding(horizontal = 12.dp, vertical = 6.dp)
-                            ) {
-                                Text(
-                                    text = "ฟรี • ไร้ลายน้ำ 100%",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = AppleGreen
-                                )
-                            }
-                        }
+            // Tool 1: Camera Scanner (Primary action)
+            item {
+                HomeToolCard(
+                    icon = Icons.Default.DocumentScanner,
+                    badgeColors = listOf(AppleIndigo, AppleBlue),
+                    title = "สแกนเอกสารด้วยกล้อง",
+                    description = "ตรวจจับขอบกระดาษและปรับมุมภาพอัตโนมัติ",
+                    isPrimary = true,
+                    onClick = onScanWithCamera
+                )
+            }
 
-                        Spacer(modifier = Modifier.height(16.dp))
+            // Tool 2: Images to PDF
+            item {
+                HomeToolCard(
+                    icon = Icons.Default.AddPhotoAlternate,
+                    badgeColor = AppleBlue,
+                    title = "แปลงรูปภาพเป็น PDF",
+                    description = "เลือกรูปถ่ายจากอัลบั้มเพื่อสร้างเป็นเอกสาร",
+                    isPrimary = false,
+                    onClick = onPickImages
+                )
+            }
 
-                        Text(
-                            text = "แปลงรูปเป็น PDF (Images to PDF)",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp,
-                            color = AppleTextPrimary
-                        )
+            // Tool 3: PDF Merge
+            item {
+                HomeToolCard(
+                    icon = Icons.AutoMirrored.Filled.CallMerge,
+                    badgeColor = AppleTeal,
+                    title = "รวมไฟล์ PDF หลายฉบับ",
+                    description = "เลือกไฟล์ PDF เดิมมาจัดหน้าและรวมเป็นฉบับเดียว",
+                    isPrimary = false,
+                    onClick = onPickPdfs
+                )
+            }
 
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        Text(
-                            text = "เลือกรูปภาพเอกสารสแกนที่คุณพ่อถ่ายไว้ รวมเป็นไฟล์ PDF ฉบับเดียวอย่างรวดเร็ว จัดหน้าและหมุนรูปได้ทันที",
-                            fontSize = 14.sp,
-                            lineHeight = 20.sp,
-                            color = AppleTextSecondary
-                        )
-
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        // Apple Prominent Action Button
-                        Button(
-                            onClick = onNavigateToImageToPdf,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = AppleBlue,
-                                contentColor = Color.White
-                            ),
-                            elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
-                        ) {
-                            Text(
-                                text = "เริ่มรวมไฟล์เอกสาร",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
-                    }
-                }
+            // History Section Header
+            item {
+                Text(
+                    text = "ประวัติและไฟล์ล่าสุด",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = AppleTextSecondary,
+                    modifier = Modifier.padding(start = 4.dp, top = 8.dp)
+                )
             }
 
             // Quick Access: Document History Card
@@ -208,7 +169,6 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Vibrant Orange Squircle Badge
                         Box(
                             modifier = Modifier.appleSquircleBadge(
                                 color = AppleOrange,
@@ -235,7 +195,7 @@ fun HomeScreen(
                                 color = AppleTextPrimary
                             )
                             Text(
-                                text = "เปิดดูหรือแชร์ส่งต่อให้ผู้อื่นได้ทันที",
+                                text = "ดูและแชร์ไฟล์ PDF ที่เคยบันทึกไว้",
                                 fontSize = 13.sp,
                                 color = AppleTextSecondary
                             )
@@ -249,106 +209,91 @@ fun HomeScreen(
                     }
                 }
             }
-
-            // Future Tools Section (Apple-style Grouped Tools)
-            item {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "เครื่องมือที่จะมาในอนาคต (Roadmap)",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = AppleTextSecondary,
-                        modifier = Modifier.padding(start = 4.dp, bottom = 10.dp)
-                    )
-
-                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        FutureToolAppleCard(
-                            icon = Icons.AutoMirrored.Filled.CallMerge,
-                            badgeColor = AppleIndigo,
-                            title = "รวมไฟล์ PDF หลายฉบับ (PDF Merge)",
-                            description = "นำไฟล์ PDF สองฉบับขึ้นไปมารวมเป็นเอกสารเดียว"
-                        )
-
-                        FutureToolAppleCard(
-                            icon = Icons.Default.Compress,
-                            badgeColor = AppleOrange,
-                            title = "ย่อขนาดไฟล์ PDF (PDF Compress)",
-                            description = "ลดขนาดไฟล์เอกสารเพื่อให้ส่งอีเมลหรือไลน์ได้สะดวกยิ่งขึ้น"
-                        )
-
-                        FutureToolAppleCard(
-                            icon = Icons.Default.CameraAlt,
-                            badgeColor = AppleTeal,
-                            title = "สแกนเอกสารด้วยกล้อง (Camera Scanner)",
-                            description = "สแกนจากกล้องพร้อมตัดขอบเอกสารอัตโนมัติ"
-                        )
-                    }
-                }
-            }
         }
     }
 }
 
 @Composable
-fun FutureToolAppleCard(
+fun HomeToolCard(
     icon: ImageVector,
-    badgeColor: Color,
+    badgeColor: Color = AppleBlue,
+    badgeColors: List<Color>? = null,
     title: String,
-    description: String
+    description: String,
+    isPrimary: Boolean = false,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .appleCard(cornerRadius = 16.dp, elevation = 1.dp)
-            .padding(14.dp)
+            .appleCard(
+                cornerRadius = if (isPrimary) 20.dp else 18.dp,
+                elevation = if (isPrimary) 3.dp else 2.dp
+            )
+            .clickable(onClick = onClick)
+            .padding(18.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Squircle Badge
             Box(
-                modifier = Modifier.appleSquircleBadge(
-                    color = badgeColor,
-                    size = 40.dp,
-                    cornerRadius = 10.dp
-                ),
+                modifier = if (badgeColors != null) {
+                    Modifier.appleSquircleGradientBadge(
+                        colors = badgeColors,
+                        size = 50.dp,
+                        cornerRadius = 14.dp
+                    )
+                } else {
+                    Modifier.appleSquircleBadge(
+                        color = badgeColor,
+                        size = 50.dp,
+                        cornerRadius = 14.dp
+                    )
+                },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
                     tint = Color.White,
-                    modifier = Modifier.size(22.dp)
+                    modifier = Modifier.size(26.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.width(14.dp))
+            Spacer(modifier = Modifier.width(16.dp))
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
                     color = AppleTextPrimary
                 )
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = description,
-                    fontSize = 12.sp,
-                    color = AppleTextSecondary
+                    fontSize = 13.sp,
+                    color = AppleTextSecondary,
+                    lineHeight = 18.sp
                 )
             }
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(AppleCanvas)
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .size(34.dp)
+                    .clip(CircleShape)
+                    .background(AppleCanvas),
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "เร็วๆ นี้",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = AppleTextSecondary
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = null,
+                    tint = AppleTextSecondary,
+                    modifier = Modifier.size(16.dp)
                 )
             }
         }

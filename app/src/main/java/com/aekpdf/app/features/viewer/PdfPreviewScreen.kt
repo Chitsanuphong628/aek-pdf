@@ -152,7 +152,7 @@ fun PdfPreviewScreen(
                     ) {
                         Icon(Icons.AutoMirrored.Filled.Send, contentDescription = null, tint = Color.White)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("ส่งเข้า LINE ทันที", fontSize = 17.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text("ส่งเข้า LINE", fontSize = 17.sp, fontWeight = FontWeight.Bold, color = Color.White)
                     }
 
                     // Secondary Actions: Open and Other Share (Apple Tinted Buttons)
@@ -180,7 +180,7 @@ fun PdfPreviewScreen(
                         ) {
                             Icon(Icons.Default.Visibility, contentDescription = null)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("เปิดดูเอกสาร", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                            Text("เปิดไฟล์", fontSize = 14.sp, fontWeight = FontWeight.Bold)
                         }
 
                         // Other Share
@@ -201,7 +201,7 @@ fun PdfPreviewScreen(
                         ) {
                             Icon(Icons.Default.Share, contentDescription = null)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("แชร์อื่นๆ", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                            Text("แชร์", fontSize = 14.sp, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -254,7 +254,7 @@ fun PdfPreviewScreen(
                         )
                         val sizeFormatted = formatFileSize(file.length())
                         Text(
-                            text = "ขนาด: $sizeFormatted • ทั้งหมด $totalPages หน้า (ไร้ลายน้ำ 100%)",
+                            text = "$sizeFormatted • $totalPages หน้า",
                             fontSize = 13.sp,
                             color = AppleTextSecondary
                         )

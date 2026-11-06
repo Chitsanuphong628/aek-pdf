@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">AEK PDF</string>
-    <string name="app_tagline">Combine scan photos into PDF easily, securely, without watermark</string>
+    <string name="app_tagline">Offline PDF Document Manager</string>
     
     <!-- Navigation & Titles -->
     <string name="title_home">AEK PDF</string>
     <string name="title_image_to_pdf">Images to PDF</string>
-    <string name="title_preview">Review PDF Document</string>
+    <string name="title_preview">Review PDF</string>
     <string name="title_history">Recent Files</string>
     
     <!-- Actions -->
-    <string name="action_select_images">Select Document Photos</string>
-    <string name="action_add_more_images">Add More Photos</string>
-    <string name="action_create_pdf">Create PDF Now</string>
-    <string name="action_share">Share File</string>
-    <string name="action_open_file">Open Document</string>
-    <string name="action_clear_all">Clear All Photos</string>
+    <string name="action_select_images">Select Photos</string>
+    <string name="action_add_more_images">Add Photos</string>
+    <string name="action_create_pdf">Create PDF</string>
+    <string name="action_share">Share</string>
+    <string name="action_open_file">Open File</string>
+    <string name="action_clear_all">Clear All</string>
     <string name="action_rotate">Rotate 90°</string>
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
@@ -27,9 +27,9 @@
     <string name="page_size_a4">A4 (Standard Document)</string>
     <string name="page_size_auto">Auto Fit (Image Size)</string>
     <string name="page_quality_label">Quality &amp; Compression</string>
-    <string name="quality_high">High (Original Quality)</string>
-    <string name="quality_medium">Medium (Fast / LINE)</string>
-    <string name="quality_small">Compact (Email Friendly)</string>
+    <string name="quality_high">High (Original Resolution)</string>
+    <string name="quality_medium">Medium (Standard)</string>
+    <string name="quality_small">Compact (Small Size)</string>
     <string name="page_filter_label">Color Filter</string>
     <string name="filter_original">Original Color</string>
     <string name="filter_black_white">Document B&amp;W Scan</string>
@@ -37,10 +37,10 @@
     
     <!-- Prompts & Messages -->
     <string name="prompt_no_images_selected">No images selected yet. Tap below to choose photos.</string>
-    <string name="prompt_drag_hint">Long press or use controls to reorder pages</string>
+    <string name="prompt_drag_hint">Drag handle to reorder pages</string>
     <string name="prompt_page_counter">%1$d pages</string>
     <string name="prompt_creating_pdf">Creating PDF... Page %1$d of %2$d</string>
-    <string name="prompt_pdf_created_success">PDF created successfully!</string>
+    <string name="prompt_pdf_created_success">PDF created successfully</string>
     <string name="prompt_pdf_creation_failed">Failed to create PDF document</string>
     <string name="prompt_empty_history">No recent PDF documents found</string>
     <string name="prompt_confirm_delete">Delete this document record?</string>

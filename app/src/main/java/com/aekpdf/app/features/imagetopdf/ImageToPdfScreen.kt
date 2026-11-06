@@ -183,10 +183,9 @@ fun ImageToPdfScreen(
                             .navigationBarsPadding(),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        // Estimated size reassurance
                         val estimatedMb = String.format(Locale.getDefault(), "%.1f", uiState.pages.size * 0.35)
                         Text(
-                            text = "ขนาดประมาณ ~$estimatedMb MB • ส่ง LINE ได้เร็ว ไม่เปลืองเน็ต",
+                            text = "ขนาดประมาณ $estimatedMb MB",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Medium,
                             color = AppleTextSecondary,
@@ -311,7 +310,7 @@ fun ImageToPdfScreen(
                                 }
 
                                 Text(
-                                    text = "แตะตั้งชื่อด่วน (ไม่ต้องพิมพ์เอง):",
+                                    text = "ชื่อแนะนำ:",
                                     fontSize = 12.sp,
                                     color = AppleTextSecondary
                                 )
@@ -499,7 +498,7 @@ fun ImageToPdfScreen(
                             color = AppleTextPrimary
                         )
 
-                        // AI Scanner Option
+                        // Scanner Option
                         Button(
                             onClick = {
                                 showAddMoreSheet = false
@@ -513,7 +512,7 @@ fun ImageToPdfScreen(
                         ) {
                             Icon(Icons.Default.DocumentScanner, contentDescription = null)
                             Spacer(modifier = Modifier.width(10.dp))
-                            Text("ถ่ายสแกนด้วย AI (กล้อง)", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                            Text("สแกนด้วยกล้อง", fontSize = 15.sp, fontWeight = FontWeight.Bold)
                         }
 
                         // Photo Picker Option
@@ -549,7 +548,7 @@ fun ImageToPdfScreen(
                         ) {
                             Icon(Icons.Default.PictureAsPdf, contentDescription = null, tint = AppleTextSecondary)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("หรือเพิ่มจากไฟล์ PDF เดิม", color = AppleTextSecondary, fontSize = 14.sp)
+                            Text("นำเข้าจากไฟล์ PDF", color = AppleTextSecondary, fontSize = 14.sp)
                         }
                     }
                 }
@@ -844,7 +843,7 @@ fun EmptySelectionState(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "เลือกวิธีเพิ่มเอกสารสแกนที่คุณพ่อต้องการ\nไร้ลายน้ำ 100% • ปลอดภัยในเครื่อง ไม่เสียเงิน",
+                        text = "เลือกวิธีนำเข้าเอกสารเพื่อเริ่มสร้างไฟล์ PDF",
                         fontSize = 13.sp,
                         textAlign = TextAlign.Center,
                         color = AppleTextSecondary,
@@ -852,9 +851,9 @@ fun EmptySelectionState(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
-                // Primary Option: AI Scanner
+                // Primary Option: Camera Scanner
                 Button(
                     onClick = onScanWithAi,
                     modifier = Modifier
@@ -867,7 +866,7 @@ fun EmptySelectionState(
                     Icon(Icons.Default.CameraAlt, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "ถ่ายสแกนด้วย AI (ตัดขอบให้อัตโนมัติ)",
+                        text = "สแกนเอกสารด้วยกล้อง",
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -889,7 +888,7 @@ fun EmptySelectionState(
                     Icon(Icons.Default.PhotoLibrary, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "เลือกรูปภาพจากอัลบั้ม",
+                        text = "เลือกรูปภาพจากเครื่อง",
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -903,7 +902,7 @@ fun EmptySelectionState(
                     Icon(Icons.Default.PictureAsPdf, contentDescription = null, tint = AppleTextSecondary, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "หรือเพิ่มจากไฟล์ PDF เดิมที่มีอยู่แล้ว",
+                        text = "นำเข้าจากไฟล์ PDF",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium,
                         color = AppleTextSecondary

@@ -27,6 +27,7 @@ import com.aekpdf.app.core.ui.theme.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onLaunchRapidCamera: () -> Unit,
     onScanWithCamera: () -> Unit,
     onPickImages: () -> Unit,
     onPickPdfs: () -> Unit,
@@ -109,19 +110,31 @@ fun HomeScreen(
                 )
             }
 
-            // Tool 1: Camera Scanner (Primary action)
+            // Tool 1: Rapid Camera Scanner (Primary action)
+            item {
+                HomeToolCard(
+                    icon = Icons.Default.CameraAlt,
+                    badgeColors = listOf(AppleIndigo, AppleBlue),
+                    title = "ถ่ายรัวต่อเนื่อง (หลายหน้า)",
+                    description = "ถ่ายติดกันรวดเร็ว ไม่ต้องรอกดทีละหน้า แล้วรวมเป็น PDF ทันที",
+                    isPrimary = true,
+                    onClick = onLaunchRapidCamera
+                )
+            }
+
+            // Tool 2: Automatic Edge Scanner (ML Kit)
             item {
                 HomeToolCard(
                     icon = Icons.Default.DocumentScanner,
-                    badgeColors = listOf(AppleIndigo, AppleBlue),
-                    title = "สแกนเอกสารด้วยกล้อง",
-                    description = "ตรวจจับขอบกระดาษและปรับมุมภาพอัตโนมัติ",
-                    isPrimary = true,
+                    badgeColor = AppleTeal,
+                    title = "สแกนตัดขอบอัตโนมัติ",
+                    description = "ตรวจจับขอบกระดาษและปรับมุมภาพทีละหน้า",
+                    isPrimary = false,
                     onClick = onScanWithCamera
                 )
             }
 
-            // Tool 2: Images to PDF
+            // Tool 3: Images to PDF
             item {
                 HomeToolCard(
                     icon = Icons.Default.AddPhotoAlternate,
@@ -133,11 +146,11 @@ fun HomeScreen(
                 )
             }
 
-            // Tool 3: PDF Merge
+            // Tool 4: PDF Merge
             item {
                 HomeToolCard(
                     icon = Icons.AutoMirrored.Filled.CallMerge,
-                    badgeColor = AppleTeal,
+                    badgeColor = ApplePurple,
                     title = "รวมไฟล์ PDF หลายฉบับ",
                     description = "เลือกไฟล์ PDF เดิมมาจัดหน้าและรวมเป็นฉบับเดียว",
                     isPrimary = false,

@@ -61,7 +61,8 @@ import java.util.Locale
 fun ImageToPdfScreen(
     viewModel: ImageToPdfViewModel,
     onNavigateBack: () -> Unit,
-    onNavigateToPreview: (filePath: String) -> Unit
+    onNavigateToPreview: (filePath: String) -> Unit,
+    onLaunchRapidCamera: (() -> Unit)? = null
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -257,6 +258,7 @@ fun ImageToPdfScreen(
             if (uiState.pages.isEmpty()) {
                 // Friendly Apple-styled Empty State
                 EmptySelectionState(
+                    onLaunchRapidCamera = onLaunchRapidCamera,
                     onScanWithAi = launchAiScanner,
                     onPickImages = {
                         photoPickerLauncher.launch(
@@ -498,7 +500,26 @@ fun ImageToPdfScreen(
                             color = AppleTextPrimary
                         )
 
-                        // Scanner Option
+                        // Rapid Camera Option
+                        if (onLaunchRapidCamera != null) {
+                            Button(
+                                onClick = {
+                                    showAddMoreSheet = false
+                                    onLaunchRapidCamera()
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(52.dp),
+                                shape = RoundedCornerShape(14.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = AppleBlue)
+                            ) {
+                                Icon(Icons.Default.CameraAlt, contentDescription = null)
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text("ถ่ายรัวต่อเนื่อง (หลายหน้า)", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                            }
+                        }
+
+                        // Auto Edge Scanner Option
                         Button(
                             onClick = {
                                 showAddMoreSheet = false
@@ -512,7 +533,7 @@ fun ImageToPdfScreen(
                         ) {
                             Icon(Icons.Default.DocumentScanner, contentDescription = null)
                             Spacer(modifier = Modifier.width(10.dp))
-                            Text("สแกนด้วยกล้อง", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                            Text("สแกนตัดขอบอัตโนมัติ", fontSize = 15.sp, fontWeight = FontWeight.Bold)
                         }
 
                         // Photo Picker Option
@@ -794,6 +815,7 @@ fun PageListItem(
 
 @Composable
 fun EmptySelectionState(
+    onLaunchRapidCamera: (() -> Unit)? = null,
     onScanWithAi: () -> Unit,
     onPickImages: () -> Unit,
     onPickPdf: () -> Unit
@@ -827,9 +849,9 @@ fun EmptySelectionState(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Default.DocumentScanner,
+                        imageVector = Icons.Default.CameraAlt,
                         contentDescription = null,
-                        modifier = Modifier.size(38.dp),
+                        modifier = Modifier.size(36.dp),
                         tint = Color.White
                     )
                 }
@@ -853,26 +875,67 @@ fun EmptySelectionState(
 
                 Spacer(modifier = Modifier.height(6.dp))
 
-                // Primary Option: Camera Scanner
-                Button(
-                    onClick = onScanWithAi,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(52.dp),
-                    shape = RoundedCornerShape(14.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = AppleBlue),
-                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
-                ) {
-                    Icon(Icons.Default.CameraAlt, contentDescription = null)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "สแกนเอกสารด้วยกล้อง",
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                // Primary Option: Rapid Camera (if supported) or AI Scanner
+                if (onLaunchRapidCamera != null) {
+                    Button(
+                        onClick = onLaunchRapidCamera,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = AppleBlue),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+                    ) {
+                        Icon(Icons.Default.CameraAlt, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "ถ่ายรัวต่อเนื่อง (หลายหน้า)",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    OutlinedButton(
+                        onClick = onScanWithAi,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = AppleCardSurface,
+                            contentColor = AppleIndigo
+                        ),
+                        border = BorderStroke(1.dp, AppleIndigo.copy(alpha = 0.35f))
+                    ) {
+                        Icon(Icons.Default.DocumentScanner, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "สแกนตัดขอบอัตโนมัติ",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                } else {
+                    Button(
+                        onClick = onScanWithAi,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(52.dp),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = AppleBlue),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+                    ) {
+                        Icon(Icons.Default.CameraAlt, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "สแกนเอกสารด้วยกล้อง",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
 
-                // Secondary Option: Photo Album
+                // Photo Album Option
                 OutlinedButton(
                     onClick = onPickImages,
                     modifier = Modifier
@@ -894,7 +957,7 @@ fun EmptySelectionState(
                     )
                 }
 
-                // Tertiary Option: Combine existing PDF
+                // Combine existing PDF Option
                 TextButton(
                     onClick = onPickPdf,
                     modifier = Modifier.fillMaxWidth()

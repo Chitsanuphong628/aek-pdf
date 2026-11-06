@@ -12,16 +12,17 @@
 
 ## จุดเด่นของแอพพลิเคชัน (Key Features)
 
-1. **ฟรี 100% & ไร้ลายน้ำ (No Watermarks)**: เอกสารสะอาด ปราศจากลายน้ำหรือโลโก้ของผู้พัฒนา
-2. **ทำงานในเครื่อง 100% (Offline & Privacy-First)**: รูปภาพและเอกสารทั้งหมดถูกประมวลผลภายในอุปกรณ์ ไม่มีการอัพโหลดขึ้น Cloud Server ปลอดภัยจากข้อมูลส่วนบุคคลรั่วไหล
-3. **ระบบจัดการหน่วยความจำปลอดภัยสูง (OOM-Safe Streaming)**: ป้องกันปัญหาแอพเด้ง (OutOfMemoryError) จากการนำเข้ารูปถ่ายเอกสารสแกนความละเอียดสูงหลายสิบภาพ ด้วยระบบประมวลผลแบบ Single-Page Bitmap Streaming & Subsampling
-4. **ออกแบบ UX เพื่อคุณพ่อ (Elderly & Accessible UI)**:
-   - ปุ่มกดขนาดใหญ่ ชัดเจน อ่านง่าย รองรับทั้งภาษาไทยและอังกฤษ
-   - แสดงลำดับหน้าชัดเจน (หน้า 1, หน้า 2, ...)
-   - หมุนภาพ (Rotate 90°) และจัดลำดับหน้า (Move Up / Down) ได้อย่างอิสระ
+1. **ถ่ายรัวต่อเนื่อง (Rapid Continuous Multi-Page Camera)**: ถ่ายเอกสารหลายหน้าติดต่อกันได้อย่างรวดเร็ว ไม่ต้องตัดเข้าหน้าตรวจทานทีละหน้า ช่องมองภาพเปิดต่อเนื่องพร้อมตัวนับจำนวนหน้าและพรีวิวสด กดเสร็จสิ้นเพื่อเข้าสู่หน้าจัดเรียงได้ทันที
+2. **ฟรี 100% & ไร้ลายน้ำ (No Watermarks)**: เอกสารสะอาด ปราศจากลายน้ำหรือโลโก้ของผู้พัฒนา
+3. **ทำงานในเครื่อง 100% (Offline & Privacy-First)**: รูปภาพและเอกสารทั้งหมดถูกประมวลผลภายในอุปกรณ์ ไม่มีการอัพโหลดขึ้น Cloud Server ปลอดภัยจากข้อมูลส่วนบุคคลรั่วไหล
+4. **ระบบจัดการหน่วยความจำปลอดภัยสูง (OOM-Safe Streaming)**: ป้องกันปัญหาแอพเด้ง (OutOfMemoryError) จากการนำเข้ารูปถ่ายเอกสารสแกนความละเอียดสูงหลายสิบภาพ ด้วยระบบประมวลผลแบบ Single-Page Bitmap Streaming & Subsampling
+5. **ออกแบบ UX เพื่อคุณพ่อ (Elderly & Accessible UI)**:
+   - สไตล์ Apple Minimalist คลีนตา ไร้สิ่งรบกวน
+   - สไลด์ซ้ายเพื่อลบ (Swipe to Delete) พร้อมแอนิเมชันคืนรูปและกดยกเลิกได้
+   - แดร็กแอนด์ดรอป (Drag & Drop) เพื่อสลับจัดเรียงลำดับหน้า
    - พรีวิวเอกสารจริงทันทีก่อนส่งออก พร้อมปุ่มกดส่งเข้า **LINE**, **Google Drive**, หรือ **เปิดดู** ได้ใน 1 คลิก
-5. **บันทึกประวัติเอกสาร (Local History)**: จดจำไฟล์ PDF ที่เคยสร้างไว้ในเครื่องผ่าน Room Database เปิดดูย้อนหลังหรือแชร์ซ้ำได้ตลอดเวลา
-6. **วางเสาเข็มสถาปัตยกรรมระดับ Production-grade (Clean Architecture)**: แยก Layer ชัดเจน พร้อมโครงสร้างโมดูลที่รองรับการอัพเดทฟีเจอร์ใหม่ๆ ในอนาคต (เช่น รวมไฟล์ PDF, ย่อขนาด, สแกนด้วยกล้อง)
+6. **บันทึกประวัติเอกสาร (Local History)**: จดจำไฟล์ PDF ที่เคยสร้างไว้ในเครื่องผ่าน Room Database เปิดดูย้อนหลังหรือแชร์ซ้ำได้ตลอดเวลา
+7. **สแกนตัดขอบอัตโนมัติ (Google ML Kit)**: ตรวจจับขอบกระดาษ ปรับมุมเอียง และฟิลเตอร์ขาวดำเอกสารอัตโนมัติ
 
 ---
 
@@ -44,8 +45,9 @@ com.aekpdf.app/
 │   │   └── PdfHistoryEntity.kt
 │   └── ui/theme/                      # Material 3 Accessible Colors & Theme
 └── features/
-    ├── home/                          # หน้าหลัก Hub & Roadmap ฟีเจอร์ในอนาคต
-    ├── imagetopdf/                    # ฟีเจอร์หลัก: เลือกรูป จัดหน้า ปรับขนาด สร้าง PDF
+    ├── home/                          # หน้าหลัก Hub รวม 4 เครื่องมือจัดการเอกสาร
+    ├── camera/                        # โหมดกล้องถ่ายรัวต่อเนื่อง (CameraX Rapid Continuous Mode)
+    ├── imagetopdf/                    # จัดหน้า ลากสลับลำดับ สไลด์ลบ และสร้าง PDF
     ├── viewer/                        # หน้าพรีวิวเอกสารด้วย Native PdfRenderer & แชร์ด่วน
     └── history/                       # หน้ารวมประวัติไฟล์ PDF ที่เคยสร้าง
 ```
@@ -55,7 +57,9 @@ com.aekpdf.app/
 ## เทคโนโลยีที่ใช้ (Tech Stack)
 
 - **Language**: Kotlin 2.0.21
-- **UI Toolkit**: Jetpack Compose & Material 3
+- **UI Toolkit**: Jetpack Compose & Material 3 (Apple Minimalist Design System)
+- **Camera Engine**: AndroidX CameraX 1.4.0 (Latency-minimized continuous shooting)
+- **Document Scanner**: Google ML Kit Document Scanner
 - **Image Pipeline**: Coil 2.7.0 & Android Native Bitmap Subsampling
 - **PDF Engine**: Android Native `PdfDocument` & `PdfRenderer`
 - **Database**: AndroidX Room 2.6.1 + KSP

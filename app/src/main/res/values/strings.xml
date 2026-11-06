@@ -5,6 +5,7 @@
     <!-- Navigation & Titles -->
     <string name="title_home">AEK PDF</string>
     <string name="title_image_to_pdf">ภาพเป็น PDF</string>
+    <string name="title_rapid_camera">ถ่ายรัวต่อเนื่อง</string>
     <string name="title_preview">ตรวจทานเอกสาร PDF</string>
     <string name="title_history">ประวัติเอกสาร</string>
     

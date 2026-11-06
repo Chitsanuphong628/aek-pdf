@@ -22,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aekpdf.app.core.scanner.DocumentScannerHelper
 import com.aekpdf.app.core.ui.theme.AekPdfTheme
+import com.aekpdf.app.features.camera.RapidCameraScreen
 import com.aekpdf.app.features.history.HistoryScreen
 import com.aekpdf.app.features.history.HistoryViewModel
 import com.aekpdf.app.features.home.HomeScreen
@@ -116,6 +117,9 @@ class MainActivity : ComponentActivity() {
                     // Home Dashboard
                     composable("home") {
                         HomeScreen(
+                            onLaunchRapidCamera = {
+                                navController.navigate("rapid_camera")
+                            },
                             onScanWithCamera = launchCameraScanner,
                             onPickImages = {
                                 homePhotoPickerLauncher.launch(
@@ -131,6 +135,25 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
+                    // Rapid Continuous Multi-Page Camera
+                    composable("rapid_camera") {
+                        RapidCameraScreen(
+                            onDismiss = {
+                                navController.popBackStack()
+                            },
+                            onComplete = { uris ->
+                                if (uris.isNotEmpty()) {
+                                    imageToPdfViewModel.addImages(uris)
+                                    navController.navigate("image_to_pdf") {
+                                        popUpTo("home")
+                                    }
+                                } else {
+                                    navController.popBackStack()
+                                }
+                            }
+                        )
+                    }
+
                     // Image to PDF Conversion Screen
                     composable("image_to_pdf") {
                         ImageToPdfScreen(
@@ -141,6 +164,9 @@ class MainActivity : ComponentActivity() {
                             onNavigateToPreview = { filePath ->
                                 val encoded = URLEncoder.encode(filePath, StandardCharsets.UTF_8.toString())
                                 navController.navigate("preview/$encoded")
+                            },
+                            onLaunchRapidCamera = {
+                                navController.navigate("rapid_camera")
                             }
                         )
                     }

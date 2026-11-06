@@ -75,6 +75,12 @@ dependencies {
     // Image loading
     implementation(libs.coil.compose)
 
+    // CameraX (Continuous Multi-Page Rapid Scanning)
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
+
     // Google ML Kit Document Scanner (AI Edge Detection & Filter Modes)
     implementation(libs.mlkit.document.scanner)
 

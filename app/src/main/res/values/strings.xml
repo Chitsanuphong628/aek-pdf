@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">AEK PDF</string>
+    <string name="app_tagline">รวมภาพสแกนเป็น PDF ง่าย ปลอดภัย ไร้ลายน้ำ</string>
+    
+    <!-- Navigation & Titles -->
+    <string name="title_home">AEK PDF</string>
+    <string name="title_image_to_pdf">ภาพเป็น PDF</string>
+    <string name="title_preview">ตรวจทานเอกสาร PDF</string>
+    <string name="title_history">ประวัติเอกสาร</string>
+    
+    <!-- Actions -->
+    <string name="action_select_images">เลือกรูปภาพเอกสาร</string>
+    <string name="action_add_more_images">เพิ่มรูปภาพ</string>
+    <string name="action_create_pdf">สร้างไฟล์ PDF ทันที</string>
+    <string name="action_share">แชร์ไฟล์</string>
+    <string name="action_open_file">เปิดดูเอกสาร</string>
+    <string name="action_clear_all">ล้างรูปทั้งหมด</string>
+    <string name="action_rotate">หมุน 90°</string>
+    <string name="action_delete">ลบ</string>
+    <string name="action_cancel">ยกเลิก</string>
+    <string name="action_confirm">ตกลง</string>
+    
+    <!-- Options & Settings -->
+    <string name="pdf_options_title">ตั้งค่าไฟล์ PDF</string>
+    <string name="pdf_file_name_label">ชื่อไฟล์ PDF</string>
+    <string name="page_size_label">ขนาดหน้ากระดาษ</string>
+    <string name="page_size_a4">A4 (มาตรฐานเอกสาร)</string>
+    <string name="page_size_auto">ตามขนาดภาพ (Auto Fit)</string>
+    <string name="page_quality_label">คุณภาพและความคมชัด</string>
+    <string name="quality_high">คมชัดสูง (ไฟล์ต้นฉบับ)</string>
+    <string name="quality_medium">ปานกลาง (ส่ง LINE ได้เร็ว)</string>
+    <string name="quality_small">ประหยัดพื้นที่ (ขนาดเล็ก)</string>
+    <string name="page_filter_label">สีเอกสาร</string>
+    <string name="filter_original">สีต้นฉบับ</string>
+    <string name="filter_black_white">ขาวดำเอกสาร (B&amp;W Scan)</string>
+    <string name="filter_grayscale">โทนเทา (Grayscale)</string>
+    
+    <!-- Prompts & Messages -->
+    <string name="prompt_no_images_selected">ยังไม่ได้เลือกรูปภาพ กรุณากดปุ่มด้านล่างเพื่อเลือกรูปภาพ</string>
+    <string name="prompt_drag_hint">แตะค้างที่รูปเพื่อสลับลำดับหน้าได้</string>
+    <string name="prompt_page_counter">%1$d หน้า</string>
+    <string name="prompt_creating_pdf">กำลังสร้างไฟล์ PDF... หน้า %1$d จาก %2$d</string>
+    <string name="prompt_pdf_created_success">สร้างไฟล์ PDF สำเร็จแล้ว!</string>
+    <string name="prompt_pdf_creation_failed">เกิดข้อผิดพลาดในการสร้างไฟล์ PDF</string>
+    <string name="prompt_empty_history">ยังไม่มีประวัติการสร้างไฟล์ PDF</string>
+    <string name="prompt_confirm_delete">ต้องการลบประวัติไฟล์นี้ใช่หรือไม่?</string>
+</resources>
